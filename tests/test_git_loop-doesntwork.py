@@ -1,21 +1,22 @@
-import run, os time
+import git
+import time
 
 # URL of the Github repository
 repo_url = 'https://github.com/username/repository.git'
 
 # Local path where the repository will be cloned
-local_path = os.getcwd()
+local_path = '/path/to/local/folder'
 
 # Periodically check for new commits in the repository
 while True:
     try:
         # Clone the repository if it doesn't already exist
         if not os.path.exists(local_path):
-            run.Repo.clone_from(repo_url, local_path)
+            git.Repo.clone_from(repo_url, local_path)
             update_program_on_device(local_path)
         else:
             # Open the repository
-            repo = run.Repo(local_path)
+            repo = git.Repo(local_path)
             # Check if the latest commit on the remote main branch is the same as the local one
             local_hash = repo.head.commit.hexsha
             remote_hash = repo.remotes.origin.refs.master.commit.hexsha
@@ -29,5 +30,4 @@ while True:
         # Handle any errors that occur
         print(f'An error occurred: {e}')
     # Wait for a specified period before checking for new commits again
-    os.exec("main.py")
-    time.sleep(300) # 5 minutes
+    time.sleep(60) # check for new commits every 60 seconds
