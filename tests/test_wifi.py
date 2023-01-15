@@ -1,6 +1,4 @@
-import secrets
-import network # Wi-Fi
-import time    # Sleep
+import secrets, network, time    # Sleep
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)

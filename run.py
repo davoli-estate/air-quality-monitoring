@@ -1,4 +1,4 @@
-import time, main
+import time
 from breakout_bme68x import BreakoutBME68X, STATUS_HEATER_STABLE # https://github.com/pimoroni/pimoroni-pico/tree/main/micropython/modules/breakout_bme68x
 from pimoroni_i2c import PimoroniI2C
 
