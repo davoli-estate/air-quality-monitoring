@@ -6,7 +6,7 @@ i2c = PimoroniI2C(sda=0, scl=1)
 sensor = BreakoutBME68X(i2c)
 heater = "Unstable"
 
-while heater is "Unstable":
+while heater is "Unstable": #comment
     # Gather data
     temperature, pressure, humidity, gas, status, _, _ = sensor.read()
     heater = "Stable" if status & STATUS_HEATER_STABLE else "Unstable"
