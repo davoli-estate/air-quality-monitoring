@@ -20,7 +20,7 @@ else:
 
 
 # URL of the RAW file to clone
-script_url = "https://raw.githubusercontent.com/kelseyhightower/nocode/master/Dockerfile"
+script_url = "https://raw.githubusercontent.com/Marcvd316/air-quality-monitoring/main/run.py"
 
 while True:
 
@@ -29,14 +29,16 @@ while True:
     print(script_content)
 
     # Write content of script to a file
-    f = open("run.py", "w")
+    f = open("air_quality_monitor.py", "w")
     f.write(script_content)
     f.close()
 
     # Read and print the script
-    f = open("run.py", "r")
+    f = open("air_quality_monitor.py", "r")
     print(f.read())
     f.close()
     time.sleep(2)
 
     # Run the script
+    #collect_data()
+    exec(open('air_quality_monitor.py').read())
