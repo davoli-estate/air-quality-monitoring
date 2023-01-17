@@ -1,4 +1,4 @@
-import uos, urequests, secrets, network, time
+import urequests, secrets, network, time
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
