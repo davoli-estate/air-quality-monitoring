@@ -7,17 +7,15 @@ sensor = BreakoutBME68X(i2c)
 
 
 def collect_data():
-    heater = "Unstable"
+    heater = "Unstable" # This ensures the while loop below runs at least twice on execution, to ensure the heater can stabilize
 
     while heater is "Unstable":
         # Gather data
         temperature, pressure, humidity, gas, status, _, _ = sensor.read()
         heater = "Stable" if status & STATUS_HEATER_STABLE else "Unstable"
-        
 
         # Print raw one-liner
-        print("{:0.2f}c, {:0.2f}Pa, {:0.2f}%, {:0.2f} Ohms, Heater: {}".format(
-            temperature, pressure, humidity, gas, heater))
+        #print("{:0.2f}c, {:0.2f}Pa, {:0.2f}%, {:0.2f} Ohms, Heater: {}".format(temperature, pressure, humidity, gas, heater))
         
         # Print one value per line with adjusted measures
         print("Temperature:", "{:0.2f}C".format(temperature))
@@ -27,13 +25,9 @@ def collect_data():
         print("CO2 equivalent: {:.2f} ppm".format(gas/56.1))
         print("Heater:", heater)
 
-        # To research: Is there other things being measured that I can get?
-        # answer : https://github.com/pimoroni/bme680-python
         # Send to InfluxDB
+        #influxdb.send_data()
 
         #################
 
-        time.sleep(1.0)
-
-if __name__ == "__main__":
-    pass
+        time.sleep(3)
