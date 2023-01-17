@@ -26,7 +26,7 @@ while True:
 
     # Pull script from URL
     script_content = urequests.get(script_url).content
-    print(script_content)
+    print(script_content) 
 
     # Write content of script to a file
     f = open("air_quality_monitor.py", "w")
