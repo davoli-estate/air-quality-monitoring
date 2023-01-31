@@ -5,7 +5,6 @@ from libs import influxdb
 
 i2c = PimoroniI2C(sda=0, scl=1)
 sensor = BreakoutBME68X(i2c)
-timeseries_data = "" # Init
 
 def collect_data():
     heater = "Unstable" # This ensures the while loop below runs at least twice on execution, to help the heater can stabilize
