@@ -28,8 +28,7 @@ def collect_data():
 
         time.sleep(3)
     
-    # Format timeseries data
-    # data='temperature,location=kitchen value=24.8'
+    # Format timeseries data - Reference: https://docs.influxdata.com/influxdb/cloud/reference/syntax/line-protocol/
     ts_temperature = f"temperature,sensor_id={secrets.sensor_id},location={secrets.sensor_location} value={temperature}"
     ts_humidity = f"humidity,sensor_id={secrets.sensor_id},location={secrets.sensor_location} value={humidity}"
     ts_pressure= f"pressure,sensor_id={secrets.sensor_id},location={secrets.sensor_location} value={pressure/1000}"
@@ -39,7 +38,6 @@ def collect_data():
     timeseries_data = "\n".join([ts_temperature,ts_humidity,ts_pressure,ts_gas,ts_co2eq])
     print(f"Printing timeseries data: \n{timeseries_data}")
 
-    
-    
-collect_data()
-influxdb.send_timeseries_data(timeseries_data)
+    return timeseries_data
+  
+influxdb.send_timeseries_data(collect_data())
