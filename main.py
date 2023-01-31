@@ -11,11 +11,11 @@ while True:
     try:
         # Pull the Python script from URL
         script_content = urequests.get(script_url).content
+        print("Succesfully downloaded script content.")
     except:
         print("Fatal error: Unable to retrieve script content.")
         quit()
     
-
     # Write content of script to a .py file
     f = open("air_quality_monitor.py", "w")
     f.write(script_content)

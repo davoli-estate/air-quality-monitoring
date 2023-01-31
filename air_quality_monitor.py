@@ -5,10 +5,9 @@ from libs import influxdb
 
 i2c = PimoroniI2C(sda=0, scl=1)
 sensor = BreakoutBME68X(i2c)
-temperature, pressure, humidity, gas = None, None, None, None
 
 def collect_data():
-    heater = "Unstable" # This ensures the while loop below runs at least twice on execution, to ensure the heater can stabilize
+    heater = "Unstable" # This ensures the while loop below runs at least twice on execution, to help the heater can stabilize
 
     while heater is "Unstable":
         # Gather data
@@ -27,16 +26,19 @@ def collect_data():
         print("Heater:", heater)
 
         time.sleep(3)
-        # Format data
-        # data='temperature,location=kitchen value=24.8'
-        data = \
-            "temperature=" + temperature \
-            "pressure=" + pressure/1000 \
-            "humidity=" + humidity \
-            "gas=" + gas/1000 \
-            "co2eq=" + gas/56.1 \
-            "sensor_id=" + secrets.sensor_id \
-            "sensor_location=" + secrets.sensor_location
+    
+    # Format data
+    # data='temperature,location=kitchen value=24.8'
+    ts_temperature = f"temperature,sensor_id={secrets.sensor_id},location={secrets.sensor_location} value={temperature}"
+    ts_humidity = f"humidity,sensor_id={secrets.sensor_id},location={secrets.sensor_location} value={humidity}"
+    ts_pressure= f"pressure,sensor_id={secrets.sensor_id},location={secrets.sensor_location} value={pressure/1000}"
+    ts_gas= f"gas,sensor_id={secrets.sensor_id},location={secrets.sensor_location} value={gas/1000}"
+    ts_co2eq= f"co2eq,sensor_id={secrets.sensor_id},location={secrets.sensor_location} value={gas/56.1}"
 
-# Send to InfluxDB
-influxdb.send_timeseries_data(data)
+    timeseries_data = "\n".join([ts_temperature,ts_humidity,ts_pressure,ts_gas,ts_co2eq])
+    print(f"Printing timeseries data: \n{timeseries_data}")
+
+    # Send to InfluxDB
+    influxdb.send_timeseries_data(timeseries_data)
+    
+collect_data()
