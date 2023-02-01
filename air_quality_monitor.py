@@ -1,12 +1,12 @@
 import time, secrets
 from breakout_bme68x import BreakoutBME68X, STATUS_HEATER_STABLE # https://github.com/pimoroni/pimoroni-pico/tree/main/micropython/modules/breakout_bme68x
 from pimoroni_i2c import PimoroniI2C
-from libs import influxdb
+from libs import influxdb, weather_api
 
 i2c = PimoroniI2C(sda=0, scl=1)
 sensor = BreakoutBME68X(i2c)
 
-def collect_data():
+def collect_sensor_data():
     heater = "Unstable" # This ensures the while loop below runs at least twice on execution, to help the heater can stabilize
 
     while heater is "Unstable":
@@ -38,5 +38,12 @@ def collect_data():
     print(f"Printing timeseries data: \n{timeseries_data}")
 
     return timeseries_data
-  
-influxdb.send_timeseries_data(collect_data())
+
+def collect_weather_data():
+    return str(weather_api.get_current_weather_conditions())
+
+# Combine timeseries data
+timeseries_data = "\n".join([collect_sensor_data(), collect_weather_data()])
+
+# Send timeseries data to InfluxDB
+influxdb.send_timeseries_data(timeseries_data)
