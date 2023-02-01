@@ -1,6 +1,7 @@
 import urequests, time
 from libs import wifi
 
+wait_time_in_minutes = 5
 wifi.connect()
 
 # URL of the RAW file to clone
@@ -11,6 +12,7 @@ while True:
 
     try:
         # Pull the Python script from URL
+        print("Downloading script from", script_url)
         script_content = urequests.get(script_url).content
         print("Succesfully downloaded script content.")
     except:
@@ -30,8 +32,11 @@ while True:
     print("Executing script air_quality_monitor.py...")
     exec(open('air_quality_monitor.py').read())
 
-    # Wait 5 minutes
-    time.sleep(300)
+    # Wait for next run
+    next_run_time_raw = time.localtime(time.time() + wait_time_in_minutes * 60)
+    next_run_time = str(next_run_time_raw[3]) + ":" + str(next_run_time_raw[4])
+    print("Waiting", wait_time_in_minutes, "minutes for next execution at", next_run_time)
+    time.sleep(wait_time_in_minutes * 60)
 
     # Watchdog
     # https://raspberrypi.github.io/pico-sdk-doxygen/group__hardware__watchdog.html
