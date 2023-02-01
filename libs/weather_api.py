@@ -15,14 +15,6 @@ def get_current_weather_conditions():
 
     print(response.content)
     
-    # Cleanup Response Data
-    ts_weather_data = format_data(response.content)
-    print("Cleaned up weather data:", ts_weather_data)
-    return ts_weather_data
+    json = ujson.loads(response.content)
 
-# Cleanup Received Weather Data and format into InfluxDB Line Protocol Timeseries
-def format_data(data: str):
-    json = ujson.loads(data)
-    temperature = json["current"]["temp_c"]
-    print(temperature)
-    return
+    return json
