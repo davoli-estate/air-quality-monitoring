@@ -5,7 +5,8 @@ wait_time_in_minutes = 5
 wifi.connect()
 
 # URL of the RAW file to clone
-script_url = "https://raw.githubusercontent.com/Marcvd316/air-quality-monitoring/main/air_quality_monitor.py"
+script_name = "air_quality_monitor.py"
+script_url = "https://raw.githubusercontent.com/Marcvd316/air-quality-monitoring/main/" + script_name
 retrieval_attempt = 0
 
 while True:
@@ -24,13 +25,13 @@ while True:
             retrieval_attempt += 1
     
     # Write content of script to a .py file
-    f = open("air_quality_monitor.py", "w")
+    f = open(script_name, "w")
     f.write(script_content)
     f.close()
 
     # Execute the Python script
-    print("Executing script air_quality_monitor.py...")
-    exec(open('air_quality_monitor.py').read())
+    print(f"Executing script {script_name}...")
+    exec(open(script_name).read())
 
     # Wait for next run
     next_run_time_raw = time.localtime(time.time() + wait_time_in_minutes * 60)

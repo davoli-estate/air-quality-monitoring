@@ -6,7 +6,7 @@ def get_current_weather_conditions():
 
     headers = {
         "X-RapidAPI-Key": secrets.weather_api_key,
-        "X-RapidAPI-Host": secrets.weather_api_url
+        "X-RapidAPI-Host": secrets.weather_api_host
     }
     
     print("URL:", url)
@@ -14,6 +14,8 @@ def get_current_weather_conditions():
     response = urequests.get(url, headers=headers)
 
     print(response.content)
+    print(response.status_code, response.reason)
+    print(response.headers)
     
     json = ujson.loads(response.content)
 
