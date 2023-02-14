@@ -30,11 +30,11 @@ def collect_sensor_data():
         time.sleep(3)
     
     # Format metrics into timeseries data - Reference: https://docs.influxdata.com/influxdb/cloud/reference/syntax/line-protocol/
-    ts_temperature = f"temperature, {influxdb_tags} value={temperature}"
-    ts_humidity = f"humidity, {influxdb_tags} value={humidity}"
-    ts_pressure= f"pressure, {influxdb_tags} value={pressure/1000}"
-    ts_gas= f"gas, {influxdb_tags} value={gas/1000}"
-    ts_co2eq= f"co2eq, {influxdb_tags} value={gas/56.1}"
+    ts_temperature = f"temperature,{influxdb_tags} value={temperature}"
+    ts_humidity = f"humidity,{influxdb_tags} value={humidity}"
+    ts_pressure= f"pressure,{influxdb_tags} value={pressure/1000}"
+    ts_gas= f"gas,{influxdb_tags} value={gas/1000}"
+    ts_co2eq= f"co2eq,{influxdb_tags} value={gas/56.1}"
 
     timeseries_data = "\n".join([ts_temperature,ts_humidity,ts_pressure,ts_gas,ts_co2eq])
     print(f"Printing timeseries data: \n{timeseries_data}")
@@ -60,11 +60,11 @@ def collect_weather_data():
     print("Wind speed:", wind_kph)
     
     # Format metrics into timeseries data - Reference: https://docs.influxdata.com/influxdb/cloud/reference/syntax/line-protocol/
-    ts_outside_temperature = f"outside_temperature, {influxdb_tags} value={outside_temperature}"
-    ts_outside_humidity = f"outside_humidity, {influxdb_tags} value={outside_humidity}"
-    ts_atmospheric_pressure = f"atmospheric_pressure, {influxdb_tags} value={atmospheric_pressure}"
-    ts_wind_kph = f"wind_kph, {influxdb_tags} value={wind_kph}"
-    ts_feelslike = f"feelslike, {influxdb_tags} value={feelslike}"
+    ts_outside_temperature = f"outside_temperature,{influxdb_tags} value={outside_temperature}"
+    ts_outside_humidity = f"outside_humidity,{influxdb_tags} value={outside_humidity}"
+    ts_atmospheric_pressure = f"atmospheric_pressure,{influxdb_tags} value={atmospheric_pressure}"
+    ts_wind_kph = f"wind_kph,{influxdb_tags} value={wind_kph}"
+    ts_feelslike = f"feelslike,{influxdb_tags} value={feelslike}"
     
     timeseries_data = "\n".join([ts_outside_temperature,ts_outside_humidity,ts_atmospheric_pressure,ts_wind_kph,ts_feelslike])
     print(f"Printing timeseries data: \n{timeseries_data}")
