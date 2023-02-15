@@ -60,20 +60,20 @@ def collect_weather_data():
     print("Wind speed:", wind_kph)
     
     # Format metrics into timeseries data - Reference: https://docs.influxdata.com/influxdb/cloud/reference/syntax/line-protocol/
-    ts_outside_temperature = f"outside_temperature value={outside_temperature}"
-    ts_outside_humidity = f"outside_humidity value={outside_humidity}"
-    ts_atmospheric_pressure = f"atmospheric_pressure value={atmospheric_pressure}"
-    ts_wind_kph = f"wind_kph value={wind_kph}"
-    ts_feelslike = f"feelslike value={feelslike}"
+    ts_outside_temperature = f"outside_temperature,location=outside value={outside_temperature}"
+    ts_outside_humidity = f"outside_humidity,location=outside value={outside_humidity}"
+    ts_atmospheric_pressure = f"atmospheric_pressure,location=outside value={atmospheric_pressure}"
+    ts_wind_kph = f"wind_kph,location=outside value={wind_kph}"
+    ts_feelslike = f"feelslike,location=outside value={feelslike}"
     
     timeseries_data = "\n".join([ts_outside_temperature,ts_outside_humidity,ts_atmospheric_pressure,ts_wind_kph,ts_feelslike])
     print(f"Printing timeseries data: \n{timeseries_data}")
     
     return timeseries_data
 
-# Only 1 sensor should collect outdoor data and push to InfluxDB
+# Only 1 sensor should collect outside data and push to InfluxDB
 if secrets.sensor_id == "Prod_1":
-    # Combine outdoor and sensor timeseries data
+    # Combine outside and sensor timeseries data
     timeseries_data = "\n".join([collect_sensor_data(), collect_weather_data()])
 else:
     # Only collect and send sensor timeseries data
