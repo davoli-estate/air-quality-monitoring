@@ -25,19 +25,14 @@ while True:
             retrieval_attempt += 1
     
     # Write content of script to a .py file
-    f = open(script_name, "w")
-    f.write(script_content)
-    f.close()
+    with open(script_name, "w") as f: f.write(script_content)
 
     # Execute the Python script
     print(f"Executing script {script_name}...")
-    exec(open(script_name).read())
+    with open(script_name) as script: exec(script.read())
 
     # Wait for next run
     next_run_time_raw = time.localtime(time.time() + wait_time_in_minutes * 60)
     next_run_time = str(next_run_time_raw[3]) + ":" + str(next_run_time_raw[4])
     print("Waiting", wait_time_in_minutes, "minutes for next execution at", next_run_time)
     time.sleep(wait_time_in_minutes * 60)
-
-    # Watchdog
-    # https://raspberrypi.github.io/pico-sdk-doxygen/group__hardware__watchdog.html
