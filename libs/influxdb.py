@@ -14,8 +14,8 @@ def send_timeseries_data(data: str):
         "Accept": "application/json"
     }
 
-    print("data =", data)
-    print("headers =", headers)
+    print("Timeseries data = \n", data)
+    print("headers = \n", headers)
     print("Sending timeseries data to InfluxDB at:", url)
 
     response = urequests.post(url, data=data, headers=headers)
