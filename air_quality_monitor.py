@@ -30,11 +30,11 @@ def collect_sensor_data():
         time.sleep(3)
     
     # Format metrics into timeseries data - Reference: https://docs.influxdata.com/influxdb/cloud/reference/syntax/line-protocol/
-    ts_temperature = f"temperature, {influxdb_tags} value={temperature}"
-    ts_humidity = f"humidity, {influxdb_tags} value={humidity}"
-    ts_pressure= f"pressure, {influxdb_tags} value={pressure/1000}"
-    ts_gas= f"gas, {influxdb_tags} value={gas/1000}"
-    ts_co2eq= f"co2eq, {influxdb_tags} value={gas/56.1}"
+    ts_temperature = f"temperature,{influxdb_tags} value={temperature}"
+    ts_humidity = f"humidity,{influxdb_tags} value={humidity}"
+    ts_pressure= f"pressure,{influxdb_tags} value={pressure/1000}"
+    ts_gas= f"gas,{influxdb_tags} value={gas/1000}"
+    ts_co2eq= f"co2eq,{influxdb_tags} value={gas/56.1}"
 
     timeseries_data = "\n".join([ts_temperature,ts_humidity,ts_pressure,ts_gas,ts_co2eq])
     print(f"Printing timeseries data: \n{timeseries_data}")
@@ -60,19 +60,24 @@ def collect_weather_data():
     print("Wind speed:", wind_kph)
     
     # Format metrics into timeseries data - Reference: https://docs.influxdata.com/influxdb/cloud/reference/syntax/line-protocol/
-    ts_outside_temperature = f"outside_temperature, {influxdb_tags} value={outside_temperature}"
-    ts_outside_humidity = f"outside_humidity, {influxdb_tags} value={outside_humidity}"
-    ts_atmospheric_pressure = f"atmospheric_pressure, {influxdb_tags} value={atmospheric_pressure}"
-    ts_wind_kph = f"wind_kph, {influxdb_tags} value={wind_kph}"
-    ts_feelslike = f"feelslike, {influxdb_tags} value={feelslike}"
+    ts_outside_temperature = f"outside_temperature,location=outside value={outside_temperature}"
+    ts_outside_humidity = f"outside_humidity,location=outside value={outside_humidity}"
+    ts_atmospheric_pressure = f"atmospheric_pressure,location=outside value={atmospheric_pressure}"
+    ts_wind_kph = f"wind_kph,location=outside value={wind_kph}"
+    ts_feelslike = f"feelslike,location=outside value={feelslike}"
     
     timeseries_data = "\n".join([ts_outside_temperature,ts_outside_humidity,ts_atmospheric_pressure,ts_wind_kph,ts_feelslike])
     print(f"Printing timeseries data: \n{timeseries_data}")
     
     return timeseries_data
 
-# Combine timeseries data
-timeseries_data = "\n".join([collect_sensor_data(), collect_weather_data()])
+# Only 1 sensor should collect outside data and push to InfluxDB
+if secrets.sensor_id == "Prod_1":
+    # Combine outside and sensor timeseries data
+    timeseries_data = "\n".join([collect_sensor_data(), collect_weather_data()])
+else:
+    # Only collect and send sensor timeseries data
+    timeseries_data = collect_sensor_data()
 
 # Send timeseries data to InfluxDB
 influxdb.send_timeseries_data(timeseries_data)
