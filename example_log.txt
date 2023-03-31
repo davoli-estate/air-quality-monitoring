@@ -1,0 +1,59 @@
+Connecting to Wi-Fi...IP Address = 192.168.2.67
+Wi-Fi connected
+Downloading script from https://raw.githubusercontent.com/Marcvd316/air-quality-monitoring/main/air_quality_monitor.py
+Succesfully downloaded script content.
+Executing script air_quality_monitor.py...
+URL: https://weatherapi-com.p.rapidapi.com/current.json?q=Montreal
+Headers: {'X-RapidAPI-Key': '5c6a024803mshacd0c7a080ee7dep11cb4fjsn2351e4fd4406', 'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'}
+b'{"location":{"name":"Montreal","region":"Quebec","country":"Canada","lat":45.5,"lon":-73.58,"tz_id":"America/Toronto","localtime_epoch":1675474973,"localtime":"2023-02-03 20:42"},"current":{"last_updated_epoch":1675474200,"last_updated":"2023-02-03 20:30","temp_c":-26.0,"temp_f":-14.8,"is_day":0,"condition":{"text":"Partly cloudy","icon":"//cdn.weatherapi.com/weather/64x64/night/116.png","code":1003},"wind_mph":16.1,"wind_kph":25.9,"wind_degree":280,"wind_dir":"W","pressure_mb":1028.0,"pressure_in":30.36,"precip_mm":0.0,"precip_in":0.0,"humidity":42,"cloud":75,"feelslike_c":-38.6,"feelslike_f":-37.4,"vis_km":24.0,"vis_miles":14.0,"uv":1.0,"gust_mph":20.6,"gust_kph":33.1}}'
+200 b'OK'
+{'CDN-CachedAt': '02/04/2023 01:42:54', 'CDN-RequestId': 'd69387529db65e767b00d0b329cd4f75', 'Content-Type': 'application/json', 'CDN-Cache': 'MISS', 'CDN-PullZone': '93447', 'CDN-RequestPullCode': '200', 'Vary': 'Accept-Encoding', 'Connection': 'close', 'CDN-ProxyVer': '1.03', 'CDN-RequestCountryCode': 'US', 'X-RateLimit-Requests-Limit': '1000000', 'Date': 'Sat, 04 Feb 2023 01:42:54 GMT', 'X-RateLimit-Requests-Remaining': '999991', 'X-RateLimit-Requests-Reset': '2403839', 'Server': 'RapidAPI-1.2.8', 'CDN-Uid': '8fa3a04a-75d9-4707-8056-b7b33c8ac7fe', 'Cache-Control': 'public, max-age=180', 'CDN-RequestPullSuccess': 'True', 'X-RapidAPI-Version': '1.2.8', 'X-RapidAPI-Region': 'AWS - us-east-1', 'CDN-Status': '200', 'CDN-EdgeStorageId': '871'}
+Temperature: 24.84C
+Pressure: 102.49kPa
+Humidity: 18.58%
+Gas: 30.78 kOhms
+CO2 equivalent: 548.60 ppm
+Heater: Unstable
+Temperature: 24.85C
+Pressure: 102.49kPa
+Humidity: 18.56%
+Gas: 5.68 kOhms
+CO2 equivalent: 101.33 ppm
+Heater: Stable
+Printing timeseries data: 
+temperature,sensor_id=Prod_1,location=Basement value={temperature}
+humidity,sensor_id=Prod_1,location=Basement value={humidity}
+pressure,sensor_id=Prod_1,location=Basement value={pressure/1000}
+gas,sensor_id=Prod_1,location=Basement value={gas/1000}
+co2eq,sensor_id=Prod_1,location=Basement value={gas/56.1}
+URL: https://weatherapi-com.p.rapidapi.com/current.json?q=Montreal
+Headers: {'X-RapidAPI-Key': '5c6a024803mshacd0c7a080ee7dep11cb4fjsn2351e4fd4406', 'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'}
+b'{"location":{"name":"Montreal","region":"Quebec","country":"Canada","lat":45.5,"lon":-73.58,"tz_id":"America/Toronto","localtime_epoch":1675474973,"localtime":"2023-02-03 20:42"},"current":{"last_updated_epoch":1675474200,"last_updated":"2023-02-03 20:30","temp_c":-26.0,"temp_f":-14.8,"is_day":0,"condition":{"text":"Partly cloudy","icon":"//cdn.weatherapi.com/weather/64x64/night/116.png","code":1003},"wind_mph":16.1,"wind_kph":25.9,"wind_degree":280,"wind_dir":"W","pressure_mb":1028.0,"pressure_in":30.36,"precip_mm":0.0,"precip_in":0.0,"humidity":42,"cloud":75,"feelslike_c":-38.6,"feelslike_f":-37.4,"vis_km":24.0,"vis_miles":14.0,"uv":1.0,"gust_mph":20.6,"gust_kph":33.1}}'
+200 b'OK'
+{'CDN-CachedAt': '02/04/2023 01:42:54', 'CDN-RequestId': 'b208bbdcb871d452fc8e4c35dbfd4ff4', 'Content-Type': 'application/json', 'CDN-Cache': 'HIT', 'CDN-PullZone': '93447', 'CDN-RequestPullCode': '200', 'Vary': 'Accept-Encoding', 'Connection': 'close', 'CDN-ProxyVer': '1.03', 'CDN-RequestCountryCode': 'US', 'X-RateLimit-Requests-Limit': '1000000', 'Date': 'Sat, 04 Feb 2023 01:43:02 GMT', 'X-RateLimit-Requests-Remaining': '999990', 'X-RateLimit-Requests-Reset': '2403831', 'Server': 'RapidAPI-1.2.8', 'CDN-Uid': '8fa3a04a-75d9-4707-8056-b7b33c8ac7fe', 'Cache-Control': 'public, max-age=180', 'CDN-RequestPullSuccess': 'True', 'X-RapidAPI-Version': '1.2.8', 'X-RapidAPI-Region': 'AWS - us-east-1', 'CDN-Status': '200', 'CDN-EdgeStorageId': '871'}
+Outside Temperature: -26.0
+Feels like: -38.6
+Outside Humidity: 42
+Atmospheric Pressure: 1028.0
+Wind speed: 25.9
+Printing timeseries data: 
+outside_temperature,sensor_id=Prod_1,location=Basement value={outside_temperature}
+outside_humidity,sensor_id=Prod_1,location=Basement value={outside_humidity}
+atmospheric_pressure,sensor_id=Prod_1,location=Basement value={atmospheric_pressure}
+wind_kph,sensor_id=Prod_1,location=Basement value={wind_kph}
+feelslike,sensor_id=Prod_1,location=Basement value={feelslike}
+data = temperature,sensor_id=Prod_1,location=Basement value={temperature}
+humidity,sensor_id=Prod_1,location=Basement value={humidity}
+pressure,sensor_id=Prod_1,location=Basement value={pressure/1000}
+gas,sensor_id=Prod_1,location=Basement value={gas/1000}
+co2eq,sensor_id=Prod_1,location=Basement value={gas/56.1}
+outside_temperature,sensor_id=Prod_1,location=Basement value={outside_temperature}
+outside_humidity,sensor_id=Prod_1,location=Basement value={outside_humidity}
+atmospheric_pressure,sensor_id=Prod_1,location=Basement value={atmospheric_pressure}
+wind_kph,sensor_id=Prod_1,location=Basement value={wind_kph}
+feelslike,sensor_id=Prod_1,location=Basement value={feelslike}
+headers = {'Accept': 'application/json', 'Content-Type': 'application/octet-stream', 'Authorization': 'Token 4yNplh-yglR-Vof2qJ9tF24JtPlH-eGJk68pQMKCoVeXdnnJRGDkgTvnKPi38ZMvzMbMB2NXFgbZEeg1I2L-6g=='}
+Sending timeseries data to InfluxDB at: https://us-east-1-1.aws.cloud2.influxdata.com/api/v2/write?org=66f2c607131831e0&bucket=air_quality
+400 b'Bad Request'
+{'X-Influxdb-Build': 'Cloud', 'Date': 'Sat, 04 Feb 2023 01:43:04 GMT', 'Connection': 'close', 'Content-Length': '189', 'X-Influxdb-Request-ID': 'befc5ad25842a63e8630afa37ab32c7e', 'Content-Type': 'application/json; charset=utf-8', 'trace-id': '25dc24a94af79806', 'Strict-Transport-Security': 'max-age=15724800; includeSubDomains', 'x-platform-error-code': 'invalid', 'trace-sampled': 'false'}
+Waiting 5 minutes for next execution at 20:48
